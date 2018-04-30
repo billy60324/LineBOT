@@ -1,0 +1,21 @@
+{
+  "name": "LineBOT",
+  "scripts": {
+  },
+  "env": {
+    "ChannelAccessToken": {
+      "required": true
+    },
+    "ChannelSecret": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
