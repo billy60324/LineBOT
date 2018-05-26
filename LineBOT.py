@@ -17,7 +17,7 @@ line_bot_api = LineBotApi('IvP19kRz9Zu4Kr0Y/3pGz2Vuc02JjWN1I4fS/1xnFebLos+AVVj05
 # Channel Secret
 handler = WebhookHandler('bf73af9b5870cece6813088658ef6545')
 
-# 監聽所有來自 /callback 的 Post Request
+# listen /callback   Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -39,12 +39,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(
-        event.reply_token,
-        message)
+
+
+    print event.reply_token
+    line_bot_api.reply_message(event.reply_token,  message)
 
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='127.0.0.1', port=port)
 
