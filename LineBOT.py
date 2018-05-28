@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from flask import Flask, request, abort
 
 from linebot import (
@@ -10,7 +11,13 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 )
 
+from flask_sslify import SSLify
+
+import os
+
+
 app = Flask(__name__)
+sslify = SSLify(app)
 
 # Channel Access Token
 line_bot_api = LineBotApi('IvP19kRz9Zu4Kr0Y/3pGz2Vuc02JjWN1I4fS/1xnFebLos+AVVj05VTfL5CaAs+NfzAOVaYMJq1RmGxNSIBau7Xdi5vZRtkL41noO2xZ6zT/ZJxlwoIRWn5nXiHRXqvb3TBr39iVMtsiX7tMw9Z78gdB04t89/1O/w1cDnyilFU=')
@@ -41,11 +48,9 @@ def handle_message(event):
     message = TextSendMessage(text=event.message.text)
 
 
-    print event.reply_token
+    #print event.reply_token
     line_bot_api.reply_message(event.reply_token,  message)
 
-import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='127.0.0.1', port=port)
-
