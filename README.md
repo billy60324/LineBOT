@@ -1,6 +1,7 @@
 # **中二病少年**
 
-為了保護世界的和平，來自異世界的少年正在奮鬥著![](https://i.imgur.com/KieLTrC.jpg)
+為了保護世界的和平，來自異世界的少年正在奮鬥著
+![](https://i.imgur.com/KieLTrC.jpg)
 
 # 功能
 
