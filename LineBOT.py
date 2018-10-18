@@ -211,6 +211,37 @@ def handle_message(event):
             db.close()
         except MySQLdb.Error as e:
             app.logger.info('Error ' + str(e.args[0]) + ':' + e.args[1])
+    elif token[0] == '抽抽':
+        try:
+            db = MySQLdb.connect(HOST, USER, PASS, DBNAME, charset='utf8')
+            cursor = db.cursor()
+            if len(token) == 2:
+                if ((token[1].startswith('http://') or token[1].startswith('https://')) and token[1].endswith('jpg')):
+                    cursor.execute('INSERT INTO USER_GRAPH VALUES (\'' + token[1] + '\');')
+                    db.commit()
+                    message = TextSendMessage(text=('完工拉!'))
+                else:
+                    message = TextSendMessage(text=('是不是放錯圖片連結了R'))
+            else:
+                # 執行SQL statement
+                cursor.execute('SELECT URL FROM USER_GRAPH')
+                results = cursor.fetchall()
+
+                # 迴圈撈取資料
+                picture = []
+                for record in results:
+                    picture.append(record[0])
+
+                output = picture[random.randint(0,99999)%len(picture)]
+                #只支援https
+                if output[4] != 's':
+                    output = output.replace('http','https')
+                message = ImageSendMessage(original_content_url=output, preview_image_url=output)
+
+            # 關閉連線
+            db.close()
+        except MySQLdb.Error as e:
+            app.logger.info('Error ' + str(e.args[0]) + ':' + e.args[1])
     elif '吃什麼' in token[0] or '吃啥' in token[0]:
         try:
             db = MySQLdb.connect(HOST, USER, PASS, DBNAME, charset='utf8')
