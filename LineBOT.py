@@ -24,6 +24,12 @@ import urllib
 #from urllib.request import urlretrieve
 import re
 
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+#解決UnicodeEncodeError: 'ascii' codec can't encode characters in position 16-17: ordinal not in range(128)
+
 app = Flask(__name__)
 sslify = SSLify(app)
 
